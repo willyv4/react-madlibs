@@ -2,7 +2,7 @@ import { useState } from "react";
 import Story from "./MakeStory";
 import MadLibForm from "./MadLibForm";
 import StoryData from "./StoryData";
-import MakeStory from "./StoryContainer";
+// import MakeStory from "./StoryContainer";
 
 const MadLib = () => {
   const madLibStories = StoryData();
@@ -16,23 +16,24 @@ const MadLib = () => {
     <div className="flex flex-wrap justify-center">
       {madLibStories.map((obj, i) => (
         <Story
-          id={i}
+          id={obj.id}
           key={obj.id}
           title={obj.title}
-          story={obj.story}
           img={obj.img}
-          formData={obj.formData}
-          onClick={() => handleStoryClick(i)}
+          onClick={() => handleStoryClick(obj.id)}
         />
       ))}
       {selectedStoryId !== null && (
         <MadLibForm
           onClick={() => handleStoryClick(null)}
-          formData={madLibStories[selectedStoryId].formData}
-          story={madLibStories[selectedStoryId].story}
+          formData={
+            madLibStories.find((story) => story.id === selectedStoryId).formData
+          }
+          selectedStoryId={
+            madLibStories.find((story) => story.id === selectedStoryId).id
+          }
         />
       )}
-      <MakeStory />
     </div>
   );
 };

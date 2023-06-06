@@ -1,4 +1,4 @@
-const Story = ({ id, title, story, img, formData, onClick }) => {
+const Story = ({ id, title, img, onClick }) => {
   const handleClick = () => {
     onClick(id);
   };
